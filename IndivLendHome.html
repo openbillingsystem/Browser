@@ -8916,7 +8916,6 @@ Balance={{balanceAmount}}
 		<input id="subscription_period" class="text ui-widget-content ui-corner-all" name="subscriptionPeriod" title="" type="text" value="{{=subscription_period}}" size="20"/>
 		<label for="subscription_type">{{=$ctx.doI18N("form.label.subscription.type")}}</label>
 	        <select id="day_name" name="subscriptionType"  class="text ui-widget-content ui-corner-all" title="" style="width: 164px;" >
-	            <option value="-1">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
 		            {{#each allowedperiods}}
                          {{#if subscriptionType}}
                              {{#if $parent.parent.parent.data.subscription_type ===subscriptionType}}
@@ -9265,7 +9264,6 @@ Balance={{balanceAmount}}
                                      </td>
 	                                 <td>
                                            <select id="status" name="status"  title="" style="width: 149px;">
-			                               <option value="">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
 		                                         {{#each planStatus}}
                                                        {{#if $ctx.number($parent.parent.data.status)===$ctx.number(id)}}
  					                                           <option value="{{=id}}" selected="selected">{{=value}}</option>
@@ -9284,7 +9282,7 @@ Balance={{balanceAmount}}
                                                  </td>
 	                                             <td>
                                                         <select id="billRule" name="billRule"  title="" style="width: 149px;">
-			                                           <option value="-1">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
+			                                           <option value="">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
 		                                                   {{#each billRuleDatas}}
                                                                   {{#if $ctx.number($parent.parent.data.billRule)===$ctx.number(id)}}
 				                                                       <option value="{{=id}}" selected="selected">{{=billruleOptions}}</option>
@@ -9303,7 +9301,7 @@ Balance={{balanceAmount}}
                                              </td>
 	                                         <td>
                                                  <select id="provisioingSystem" name="provisioingSystem"  title="" style="width: 149px;">
-			                                           <option value="">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
+			                                         
 		                                                       {{#each provisionSysData}}
                                                                    {{#if $parent.parent.data.provisionSystem ===provisioingSystem}}
 				                                                        <option value="{{=provisioingSystem}}" selected="selected">{{=provisioingSystem}}</option>
@@ -9312,6 +9310,7 @@ Balance={{balanceAmount}}
                                                                    {{/if}}
                                                                {{/each}}	
 		                                          </select>
+
                                               </td>
                                           </tr>
 	                                   </tr>
@@ -9493,7 +9492,7 @@ Balance={{balanceAmount}}
 					<tr>
 <td align="right"><label for="chargevariant">{{=$ctx.doI18N("form.label.loan.charge.variant")}}</label></td>
 	<td><select id="chargevariant" name="chargevariant"  title="" style="width: 143px;">
-			 <option value="">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
+		
 		
 {{#each chargevariant}}
              {{#if $ctx.number(id)===$ctx.number($parent.parent.data.chargeVariantId)}}
@@ -9524,7 +9523,7 @@ Balance={{balanceAmount}}
 <tr><td align="right">
   <label for="priceregion">{{=$ctx.doI18N("form.label.price.priceregion")}}</label></td>
 	<td><select id="priceregion" name="priceregion"  title="" style="width: 143px;">
-               <option value="">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
+              
               {{#each priceRegionData}}
                      {{#if $ctx.number($parent.parent.data.priceregion)===$ctx.number(id)}}
      					<option value="{{=id}}" selected="selected" >{{=priceregion}}</option>
@@ -10134,11 +10133,10 @@ Balance={{balanceAmount}}
 			<span id="toolbar" class="ui-widget-header ui-corner-all">
 
   <button id="update" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="updateOrderPrice('{{=clientId}}');">{{=$ctx.doI18N("link.action.editprice")}}</button>
-<button id="cancelOrder" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="cancelOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.cancel")}}</button>
-<button id="reconnectOrder" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="reconnectOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.orderreconnect")}}</button>
-<button id="topup" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="renewalOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.topup")}}</button>
-<button id="disconnectOrder" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="disconnectOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.orderdisconnect")}}</button>
-<button id="renewalOrder" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="renewalOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.renewalorder")}}</button>
+  <button id="disconnectOrder" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="disconnectOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.orderdisconnect")}}</button>
+  <button id="reconnectOrder" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="reconnectOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.orderreconnect")}}</button>
+  <button id="renewalOrder" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="renewalOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.renewalorder")}}</button>
+  <button id="topup" class="order_actions" style="width:65;height:65; cursor:pointer" onclick="renewalOrder('{{=clientId}}');">{{=$ctx.doI18N("link.action.topup")}}</button>
 </span>
 		</td>
 	</table>
@@ -10611,45 +10609,57 @@ Balance={{balanceAmount}}
 			<td valign="top" style="padding-right: 15px;">
 				<table>
 					<tr>
-    	               	<td align="right">
-                         <label for="itemCode">{{=$ctx.doI18N("form.label.item.code")}}</label>
+               			<td align="right">
+							<input type="hidden" id="dateFormat" name="dateFormat" value="dd MMMM yyyy" />
+	   						<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
+							<label for="saleDate">{{=$ctx.doI18N("form.label.sale.date")}}</label>
+						</td>
+               			<td>
+		         			<input id="saleDate" name="saleDate" title="" type="text" value="{{=$ctx.globalDate(saleDate)}}" size="22" class="text ui-widget-content ui-corner-all datepickerfieldnoconstraint" />
+						</td> 
+					</tr>     
+					<tr>
+						<td align="right">
+                        	<label for="itemCode">{{=$ctx.doI18N("form.label.item.code")}}</label>
                         </td>
                         <td>
-	                    <select id="itemId" name="itemId"  title="" style="width: 179px;">
-			            <option value="">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
-		             {{#each itemDatas}}
-                                      {{#if $ctx.number($parent.parent.data.id)===$ctx.number(id)}}
-
-			                	<option value="{{=id}}" selected="selected">{{=itemCode}}</option>
-                        {{#else}}
-                            <option value="{{=id}}">{{=itemCode}}</option>
-                       {{/if}}
-                     {{/each}}	
-		             </select>
-
-                    <td>
-                </tr>
-				<tr>
-     				<td align="right">
-                     <label for="quantity">{{=$ctx.doI18N("form.label.item.quantity")}}</label>
-                  </td>
-                 <td>
-              <input id="quantity" name="quantity" title="" type="text"  class="text ui-widget-content ui-corner-all" value="{{=$ctx.decimal(quantity, 4)}}" size="22"/>
-              </td>
-           </tr>
- <tr>
-               <td align="right">
-
-		<input type="hidden" id="dateFormat" name="dateFormat" value="dd MMMM yyyy" />
-	   <input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
-		<label for="saleDate">{{=$ctx.doI18N("form.label.sale.date")}}</label>
-
-               </td>
-               <td>
-		         <input id="saleDate" name="saleDate" title="" type="text" value="{{=$ctx.globalDate(saleDate)}}" size="22" class="text ui-widget-content ui-corner-all datepickerfieldnoconstraint" />
-
-             </td> 
-</tr>            
+	                    	<select id="itemId" name="itemId"  title="" style="width: 179px;">
+			            	<option value="">{{=$ctx.doI18N("option.subscription.first.choice")}}</option>
+		             			{{#each itemDatas}}
+									{{#if $ctx.number($parent.parent.data.id)===$ctx.number(id)}}
+			    		            	<option value="{{=id}}" selected="selected">{{=itemCode}}</option>
+        		        	        {{#else}}
+                            			<option value="{{=id}}">{{=itemCode}}</option>
+                       				{{/if}}
+                     			{{/each}}	
+		             		</select>
+                    	<td>
+                	</tr>
+					<tr>
+     					<td align="right">
+                     		<label for="quantity">{{=$ctx.doI18N("form.label.item.quantity")}}</label>
+                  		</td>
+                 		<td>
+              				<input id="quantity" name="quantity" title="" type="text"  class="text ui-widget-content ui-corner-all" value="{{=$ctx.decimal(quantity, 4)}}" size="22"/>
+              			</td>
+           			</tr>
+ 					<tr>
+                		<td align="right">
+                      		<label for="discountId">{{=$ctx.doI18N("form.label.loan.discount.code")}}</label>
+               			</td>
+	           			<td>
+                      		<select id="discountId" name="discountId"  title="" style="width: 177px;">
+								{{#each discountMasterDatas}}
+									{{#if $ctx.number($parent.parent.data.discountId)===$ctx.number(id)}}
+					                	<option value="{{=discountMasterId}}" selected="selected" >{{=discountDescription}}</option>
+                                    {{#else}}
+  	                                    <option value="{{=discountMasterId}}">{{=discountDescription}}</option>
+                                    {{/if}}
+	                         	{{/each}}
+		            		</select>
+             			</td>
+        			</tr>
+       
 </table>
   </td>
        <td valign="top" style="padding-left: 5px; padding-right: 5px;">
@@ -10679,22 +10689,7 @@ Balance={{balanceAmount}}
                      <input id="unitPrice" name="unitPrice" title="" type="text" class="text ui-widget-content ui-corner-all" value="{{=$ctx.decimal(unitPrice, 4)}}"  Readonly size="22"/>
 	             </td>
            </tr>
-           <tr>
-                <td align="right">
-                      <label for="discountId">{{=$ctx.doI18N("form.label.loan.discount.code")}}</label>
-               </td>
-	           <td>
-                      <select id="discountId" name="discountId"  title="" style="width: 177px;">
-                             {{#each discountMasterDatas}}
-                                     {{#if $ctx.number($parent.parent.data.discountId)===$ctx.number(id)}}
-					                      <option value="{{=discountMasterId}}" selected="selected" >{{=discountDescription}}</option>
-                                    {{#else}}
-  	                                      <option value="{{=discountMasterId}}">{{=discountDescription}}</option>
-                                    {{/if}}
-	                         {{/each}}
-		            </select>
-             </td>
-        </tr>
+          
 	</table>
    </td>
   </tr>
@@ -10872,7 +10867,7 @@ Balance={{balanceAmount}}
 
 	<script id="uploadStatusFormListTemplate" type="text/x-jquery-tmpl">
 <table id='uploadstatustable' width='100%'>
-	<div id="formerrors"></div>
+	
 	<button id="addxlsfile{{=clientId}}" class="myclass">{{=$ctx.doI18N("button.xls.add")}}</button>
 <thead>
 	<tr>
@@ -10927,6 +10922,7 @@ Balance={{balanceAmount}}
 	<tr>
 		<tr>
 		<th>Id</th>
+		<th>Office Name</th>
 		<th>Item Description</th>
 		<th>SerialNo</th>
 		<th>GrnId</th>
@@ -10941,6 +10937,7 @@ Balance={{balanceAmount}}
 {{#each crudRows}}
 <tr>
 	<td> {{=id}} </td>
+	<td>{{=officeName}}</td>
 	<td> {{=itemDescription}} </td>
 	<td> {{=serialNumber}} </td>
 	<td> {{=grnId}} </td>
@@ -11139,6 +11136,7 @@ Balance={{balanceAmount}}
 <thead>
 	<tr>
 		<th>Id</th>
+		<th>Office Name</th>
 		<th>Purchase Date</th>
 		<th>Supplier Name</th>
 		<th>Item Description</th>
@@ -11151,6 +11149,7 @@ Balance={{balanceAmount}}
 {{#each crudRows}}
 <tr>
 	<td> {{=id}} </td>
+	<td> {{=officeName}}</td>
 	<td> {{=$ctx.globalDate(purchaseDate)}}</td>
 	<td> {{=supplierName}} </td>
 	<td> {{=itemDescription}} </td>
@@ -11728,7 +11727,8 @@ Balance={{balanceAmount}}
 <table id='ticketslisttable' width='100%'>
 <thead>
 	<tr>
-		<th>TicketId</th>
+		<td>Client Id</td>
+		<td>Client Name</td>
 		<th>Created on</th>
 		<th>Category</th>
 		<th>Priority</th>
@@ -11742,7 +11742,8 @@ Balance={{balanceAmount}}
 {{#each crudRows}}
 {{#if status==="OPEN"}}
 <tr>
-	<td> {{=id}} </td>
+	<td>{{=clientId}}</td>
+	<td>{{=clientName}}</td>
 	<td>{{=$ctx.globalDate(ticketDate)}}</td>
 	<td>{{=problemDescription}}</td>
 	<td>{{=priority}}</td>
@@ -11855,7 +11856,7 @@ Balance={{balanceAmount}}
                <input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}"  />
                <label for="releasingDate">{{=$ctx.doI18N("form.label.process.date")}}</label></td>
                <td> 
-               <input id="releaseDate" name="releaseDate" style="height:20px;" class="text ui-widget-content ui-corner-all" title="" type="text" value="{{=$ctx.globalDate(releaseDate)}}" size="22" class="datepickerfield" />
+               <input id="releaseDate" name="releaseDate" style="height:20px;" class="text ui-widget-content ui-corner-all datepickerfield" title="" type="text" value="{{=$ctx.globalDate(releaseDate)}}" size="22"  />
                 </td>
            </tr>
 
@@ -12878,7 +12879,7 @@ Balance={{balanceAmount}}
 					<label for="homePhoneNumber">{{=$ctx.doI18N("form.label.prospect.homephonenumber")}}</label>
 				</td>
 				<td>
-					<input id="homePhoneNumber" name="homePhoneNumber" type="text"  class="text ui-widget-content ui-corner-all" value="{{=homePhoneNumber}}" size=22/>
+					<input id="homePhoneNumber" name="homePhoneNumber" type="text"  class="text ui-widget-content ui-corner-all" value="{{=homePhoneNumber}}" size=22 placeholder="000-00000000"/>
 				</td>
 				</tr>
 
@@ -12887,7 +12888,7 @@ Balance={{balanceAmount}}
 					<label for="workPhoneNumber">{{=$ctx.doI18N("form.label.prospect.workphonenumber")}}</label>
 				</td>
 				<td>
-					<input id="workPhoneNumber" name="workPhoneNumber" type="text" value="{{=workPhoneNumber}}"  class="text ui-widget-content ui-corner-all" size=22/>
+					<input id="workPhoneNumber" name="workPhoneNumber" type="text" value="{{=workPhoneNumber}}"  class="text ui-widget-content ui-corner-all" size=22 placeholder="000-00000000"/>
 				</td>
 				</tr>
 
@@ -12896,7 +12897,7 @@ Balance={{balanceAmount}}
 					<label for="mobileNumber">{{=$ctx.doI18N("form.label.prospect.mobilenumber")}}</label>
 				</td>
 				<td>
-					<input id="mobileNumber" name="mobileNumber" type="text"  class="text ui-widget-content ui-corner-all" value="{{=mobileNumber}}" size=22/>
+					<input id="mobileNumber" name="mobileNumber" type="text"  class="text ui-widget-content ui-corner-all" value="{{=mobileNumber}}" size=22 placeholder="0000000000"/>
 				</td>
 				</tr>
 
@@ -12943,7 +12944,7 @@ Balance={{balanceAmount}}
 								<label for="cityDistrict">{{=$ctx.doI18N("form.label.prospect.district")}}</label>
 							</td>
 							<td>
-								<input id="cityDistrict" name="cityDistrict" type="text" value="{{=cityDistrict}}" size=22  class="text ui-widget-content ui-corner-all" />
+								<input id="cityDistrict" name="cityDistrict" type="text" onChange="setCountryandStateForProspect()" value="{{=cityDistrict}}" size=22  class="text ui-widget-content ui-corner-all" />
 							</td>
 						</tr>
 						<tr>
@@ -12968,7 +12969,7 @@ Balance={{balanceAmount}}
 								<label for="zipCode">{{=$ctx.doI18N("form.label.prospect.zipCode")}}</label>
 							</td>
 							<td>
-								<input id="zipCode" name="zipCode" type="text" value="{{=zipCode}}" style="height:20px;width:256px;"  class="text ui-widget-content ui-corner-all" size=33/>
+								<input id="zipCode" name="zipCode" type="text" value="{{=zipCode}}" style="height:20px;width:256px;"  class="text ui-widget-content ui-corner-all" size=33 placeholder="000000"/>
 							</td>
 						</tr>
 																		
@@ -13021,8 +13022,7 @@ Balance={{balanceAmount}}
                                   <label for="note">{{=$ctx.doI18N("form.label.prospect.note")}}</label>
 							</td>	
 							<td>
-								
-								<textarea name="note" cols="25" rows="5">{{=note}}</textarea>
+								<textarea name="note" id="note" cols="25" rows="5">{{=note}}</textarea>
 							</td>	
 						</tr>
 					</table>
@@ -14126,68 +14126,61 @@ Balance={{balanceAmount}}
 		<legend>{{=$ctx.doI18N("form.legend.job.details")}}</legend>
 		<div id="showschedulerstatus"></div>
 		<div id="schedularjobsSentForExecution"></div>
-		<div id="selectAllDiv" style="background-color:#b0c4de;">
-			<table>
-				<td class="paddingL65 paddingR65"><input type = "checkbox" id="selectAllJobs" class="selectAllJobs"/></td>
-				<td><label for="selectAll"><b>{{=$ctx.doI18N("label.batchjob.selectAll")}}</b></label></td> 
+		<div id="selectAllDiv">
+		
+		<table>
+    		<td class="paddingL65 paddingR65">&nbsp;</td>
+             <td class="alignCenter paddingR65"><button id="addNewJob" class="addNewJob">{{=$ctx.doI18N("form.button.schedularjobs.add.jobs")}}</button></td>
+			<td class="alignCenter paddingR65"><button id="runSelectedJobs" class="runSelectedJobs">{{=$ctx.doI18N("form.button.schedularjobs.run.jobs")}}</button></td>
+			<td class ="paddingL65"><button id="refreshSchedulerJobPage" class="refreshSchedulerJobPage">{{=$ctx.doI18N("form.button.schedularjobs.refresh.page")}}</button></td>
+		</table>
+		</div>
+          <div>
+			<table id='jobslisttable'width='100%' class="orderpricetable">
+              <thead>
+				  <tr>
+                    <th><input type = "checkbox" id="selectAllJobs" class="selectAllJobs"/></th>
+                    <th>{{=$ctx.doI18N("table.heading.schedulerjob.jobname")}}</th>
+                    <th>{{=$ctx.doI18N("table.heading.schedulerjob.previousrun")}}</th>
+                    <th>{{=$ctx.doI18N("table.heading.schedulerjob.nextstart")}}</th>
+                    <th>{{=$ctx.doI18N("table.heading.schedulerjob.status")}}</th>
+                    
+                      <th>&nbsp;</th>
+                  </tr>
+               </thead>
+               <tbody>
+              {{#each crudRows}}
+				<tr> 
+                    <td class="paddingL65 paddingR65"><input type="checkbox" class="scheduleJob" id="jobId{{=jobId}}" value="{{=jobId}}"/></td>
+                    <td>{{=displayName}}</td>
+                    <td>
+					    {{#if lastRunHistory}}
+						   {{=$ctx.globalDateTime(lastRunHistory.jobRunStartTime)}}
+						{{/if}}
+					</td>
+                    <td>{{=nextRunTime}}</td>
+                    <td class="paddingL65">
+					  {{#if currentlyRunning}}
+							{{=$ctx.doI18N("schedularjob.currently.running.yes")}}
+					  {{#else}}
+							{{=$ctx.doI18N("schedularjob.currently.running.no")}}
+					  {{/if}}
+					</td>
+                    <td><button id="editjob{{=jobId}}" class="editjobbtn">{{=$ctx.doI18N("label.batchjob.edit.job.details")}}</button>&nbsp;
+                    <button id="jobHistory{{=jobId}}" class="jobHistory">{{=$ctx.doI18N("label.batchjob.view.history")}}</button>&nbsp;
+                    <button id="deleteJob{{=jobId}}" class="deleteJob">{{=$ctx.doI18N("label.batchjob.delete.job")}}</button>&nbsp;
+ 					{{#if initializingError}}
+					<button id="initializingErrorInfo{{=jobId}}" class="initializingErrorInfo">{{=$ctx.doI18N("label.batchjob.view.initializing.error.info")}}</button>
+						{{/if}}</td>
+                 </tr>  
+                {{/each}}                 
+               </tbody>  
 			</table>
 		</div>
 		<br/><br/>
-		<div id="jobDetails">
-			<table>
-				{{#each crudRows}}
-					<tr>
-						<td class="paddingL65 paddingR65"><input type="checkbox" class="scheduleJob" id="jobId{{=jobId}}" value="{{=jobId}}"/></td>
-						<td>
-							<b>{{=displayName}}</b>
-						</td>
-						<td class="paddingL65">
-							<button id="editjob{{=jobId}}" class="editjobbtn">{{=$ctx.doI18N("label.batchjob.edit.job.details")}}</button>&nbsp;
-							<button id="jobHistory{{=jobId}}" class="jobHistory">{{=$ctx.doI18N("label.batchjob.view.history")}}</button>&nbsp;
-							
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>
-							{{=$ctx.doI18N("form.label.schedularjobs.nextRunTime")}} {{=$ctx.globalDateTime(nextRunTime)}}
-						</td>
-						<td class="paddingL65">
-							{{=$ctx.doI18N("form.label.schedularjobs.previous.run.status")}} 
-							{{#if lastRunHistory}}
-								{{=lastRunHistory.status}}&nbsp;
-								
-							{{/if}}
-						</td>
-					</tr>
-					<tr>
-						<td>&nbsp;</td>
-						<td>
-							{{=$ctx.doI18N("form.label.schedularjobs.lastRunTime")}} 
-							{{#if lastRunHistory}}
-								{{=$ctx.globalDateTime(lastRunHistory.jobRunStartTime)}}
-							{{/if}}
-						</td>
-						<td class="paddingL65">
-							{{=$ctx.doI18N("form.label.schedularjobs.currentlyRunning")}} 
-							{{#if currentlyRunning}}
-								{{=$ctx.doI18N("schedularjob.currently.running.yes")}}
-							{{#else}}
-								{{=$ctx.doI18N("schedularjob.currently.running.no")}}
-							{{/if}}
-						</td>
-					</tr>
-				{{/each}}
-			</table>
-		</div>
+		
 		<br/><br/>
-		<div id="executeBatchDiv">
-			<table>
-				<td class="paddingL65 paddingR65">&nbsp;</td>
-				<td class="alignCenter paddingR65"><button id="runSelectedJobs" class="runSelectedJobs">{{=$ctx.doI18N("form.button.schedularjobs.run.jobs")}}</button></td>
-				<td class ="paddingL65"><button id="refreshSchedulerJobPage" class="refreshSchedulerJobPage">{{=$ctx.doI18N("form.button.schedularjobs.refresh.page")}}</button></td>
-			</table>
-		</div>
+		
 	</fieldset>
 </script>
 
@@ -14264,6 +14257,7 @@ Balance={{balanceAmount}}
 	</form>
 </script>
 
+
 <script id="editSchedulerJobFormTemplate" type="text/x-jquery-tmpl">
 	<form id="entityform">
 		<div id="formerrors"></div>
@@ -14295,10 +14289,76 @@ Balance={{balanceAmount}}
 	</form>
 </script>
 
+<script id="schedulerJobFormTemplate" type="text/x-jquery-tmpl">
+<form id="entityform">
 
+	    <div id="formerrors" style="color:red"></div>
+	  <fieldset>
+		 <legend>{{=$ctx.doI18N("dialog.title.view.job")}}</legend>
+	<table>
+	<tr>
+		<td valign="top" style="padding-right: 15px;">
+			<table>
+				<tr>
+               	  <td align="right">
+					 <label for="jobName">{{=$ctx.doI18N("label.job.name")}}</label>
+               	 </td>
+               	 <td>
+		        	<select name="jobName" id="jobName" title="" style="width: 177px;">
+						<option value="">{{=$ctx.doI18N("option.taxmaptype.first.choice")}}</option>
+						 {{#each jobDetailData}}
+
+  	                           <option value="{{=batchName}}">{{=batchName}}</option>
+	                 {{/each}}
+					</select>
+             	 </td> 
+			</tr>
+			<tr>
+				<td align="right">
+					<label for="displayName">{{=$ctx.doI18N("form.label.job.displayname")}}</label>
+				</td>
+				<td>
+					<input type="text" id="displayName" name="displayName" class="text ui-widget-content ui-corner-all" title="" value="{{=displayName}}" size="22" />
+				</td>
+	    	</tr>            
+			
+	  </table>
+    </td>
+		<td valign="top" style="padding-right: 15px;">
+			<table>
+				<tr>
+					<td align="right">
+						<label for="cronExpression">{{=$ctx.doI18N("label.job.expression")}}</label>
+					</td>
+					<td>
+							<input type="text" id="cronExpression" name="cronExpression" class="text ui-widget-content ui-corner-all" title="" value="{{=cronExpression}}" size="22" />
+					</td>
+				</tr>
+				<tr>
+					<td align="right">
+						<label for="rate">{{=$ctx.doI18N("form.label.job.active")}}</label>
+					</td>
+					<td>
+						<input type = "checkbox" id="active" name="active" value="{{=active}}" />
+					</td>
+				</tr>
+			</table>
+		</td>
+	</tr>
+
+</table>
+<br/>
+			<span class="newLine">{{=$ctx.doI18N("resource.link.for.generating.cron.expression")}}</span>
+</fieldset>
+
+</form>
+</script>
+<script id="viewJobInitializingErrorFormTemplate" type="text/x-jquery-tmpl">
+	<span class="ui-icon ui-icon-alert floatleft" style="margin: 0 7px 20px 0;"></span>
+	<legend>{{=$ctx.doI18N("error.msg.job.initialization.failed")}}</legend>
+	<span style="display: block;">{{=initializingError}}</span>
+</script>
 <!-- end of Billing -->
-
-
 
 </body>
 </html>
